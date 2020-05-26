@@ -9,6 +9,14 @@ module.exports = (app) => {
       .catch((err) => res.send(err));
   });
 
+  //find one by id
+  app.get('/api/materials/:id', (req, res) => {
+    const { id } = req.params;
+    Material.findById(id)
+      .then((material) => res.send(material))
+      .catch((err) => res.send(err));
+  });
+
   //add new material
   app.post('/api/materials', (req, res, next) => {
     const { name, identifier, density, cost } = req.body;
@@ -30,5 +38,30 @@ module.exports = (app) => {
         next(error);
       }
     });
+  });
+
+  //edit material
+  app.put('/api/materials/:id', (req, res) => {
+    const { id } = req.params;
+
+    const { name, identifier, density, cost } = req.body;
+    const update = {
+      name: name,
+      identifier: identifier,
+      density: density,
+      cost: cost,
+    };
+
+    Material.findOneAndUpdate(id, update)
+      .then((updatedMaterial) => res.send(updatedMaterial))
+      .catch((err) => res.send(err));
+  });
+
+  //delete material
+  app.delete('/api/materials/:id', (req, res) => {
+    const { id } = req.params;
+    Material.findByIdAndDelete(id)
+      .then(res.send('material deleted sucessfully'))
+      .catch((err) => res.send(err));
   });
 };
