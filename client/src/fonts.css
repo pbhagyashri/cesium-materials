@@ -1,0 +1,19 @@
+@font-face {
+  font-family: lato-regular;
+  src: url('./assets/fonts/lato/Lato-Regular.ttf');
+}
+
+@font-face {
+  font-family: lato-light;
+  src: url('./assets/fonts/lato/Lato-Light.ttf');
+}
+
+@font-face {
+  font-family: lato-bold;
+  src: url('./assets/fonts/lato/Lato-Bold.ttf');
+}
+
+@font-face {
+  font-family: roboto_slab;
+  src: url('./assets/fonts/roboto_slab/RobotoSlab-VariableFont_wght.ttf');
+}
