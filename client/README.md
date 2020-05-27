@@ -7,7 +7,7 @@ Please run **npm install** from both directories to install all dependencies
 
 To start the project run following command
 
-### `npm run dev`
+## npm run dev
 
 I have setup concurrently to start both backend server (nodeJS) and Front-End server (React)
 
