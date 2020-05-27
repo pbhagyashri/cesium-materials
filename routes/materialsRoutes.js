@@ -52,7 +52,7 @@ module.exports = (app) => {
       cost: cost,
     };
 
-    Material.findOneAndUpdate(id, update)
+    Material.findByIdAndUpdate(id, update)
       .then((updatedMaterial) => res.send(updatedMaterial))
       .catch((err) => res.send(err));
   });

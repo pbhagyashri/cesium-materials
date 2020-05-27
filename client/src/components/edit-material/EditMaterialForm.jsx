@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import FetchMaterialById from '../../actions/fetchMaterialById';
 import Axios from 'axios';
-import { useDispatch } from 'react-redux';
+
 import MaterialCard from '../all-materials/MaterialCard';
 import '../all-materials/AllMaterials.scss';
+import '../new-material/NewMaterialForm.scss';
 
 const EditMaterialForm = (props) => {
   const id = props.history.location.pathname.split('/').pop();
@@ -13,17 +14,6 @@ const EditMaterialForm = (props) => {
   const [identifier, setIdentifier] = useState('');
   const [density, setDensity] = useState(0);
   const [cost, setCost] = useState(0);
-
-  const dispatch = useDispatch();
-  const addMaterial = (material) => ({
-    type: 'UPDATE_MATERIALS',
-    payload: {
-      name: name,
-      identifier: identifier,
-      density: density,
-      cost: cost,
-    },
-  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +28,6 @@ const EditMaterialForm = (props) => {
       }
     );
     console.log('editedMaterial', editedMaterial);
-    dispatch(addMaterial(editedMaterial.data));
   };
 
   return (
@@ -46,33 +35,37 @@ const EditMaterialForm = (props) => {
       <div className='all-mats-cont'>
         {material ? <MaterialCard material={material} /> : ''}
       </div>
-      <form className='new-material__form'>
-        <label>Name</label>
+      <form className='form'>
+        <label className='form__label'>Name</label>
         <input
           type='text'
           name='name'
           value={name}
+          className='form__input'
           onChange={(event) => setName(event.target.value)}
         />
-        <label>Identifier</label>
+        <label className='form__label'>Identifier</label>
         <input
           type='text'
           name='identifier'
           value={identifier}
+          className='form__input'
           onChange={(event) => setIdentifier(event.target.value)}
         />
-        <label>Density</label>
+        <label className='form__label'>Density</label>
         <input
           type='text'
           name='density'
           value={density}
+          className='form__input'
           onChange={(event) => setDensity(event.target.value)}
         />
-        <label>Cost</label>
+        <label className='form__label'>Cost</label>
         <input
           type='text'
           name='cost'
           value={cost}
+          className='form__input'
           onChange={(event) => setCost(event.target.value)}
         />
         <input type='submit' value='Create Material' onClick={handleSubmit} />

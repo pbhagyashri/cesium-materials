@@ -14,18 +14,6 @@ export default function (state = initialState, action) {
         ...state,
         allMaterials: [action.payload, ...state.allMaterials],
       };
-    case 'UPDATE_MATERIALS':
-      const updatedItems = state['allMaterials'].map((item) => {
-        if (item._id === action.payload._id) {
-          debugger;
-          return [...item, ...action.payload];
-        }
-        return item;
-      });
-      return {
-        ...state,
-        allMaterials: updatedItems,
-      };
 
     default:
       return state;

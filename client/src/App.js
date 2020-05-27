@@ -14,7 +14,8 @@ function App() {
     <div>
       <Router>
         <Header />
-        <NewMaterialsForm />
+
+        <Route exact path='/' component={NewMaterialsForm} />
         <Route exact path='/' component={AllMaterials} />
         <Route exact path='/materials/:id' component={EditMaterialForm} />
       </Router>
