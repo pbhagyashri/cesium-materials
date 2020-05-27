@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import FetchMaterialById from '../../actions/fetchMaterialById';
 import Axios from 'axios';
 import { useDispatch } from 'react-redux';
+import MaterialCard from '../all-materials/MaterialCard';
+import '../all-materials/AllMaterials.scss';
 
-const NewMaterialsForm = () => {
+const EditMaterialForm = (props) => {
+  const id = props.history.location.pathname.split('/').pop();
+  const material = FetchMaterialById(id);
+
   const [name, setName] = useState('');
   const [identifier, setIdentifier] = useState('');
   const [density, setDensity] = useState(0);
@@ -11,15 +16,20 @@ const NewMaterialsForm = () => {
 
   const dispatch = useDispatch();
   const addMaterial = (material) => ({
-    type: 'ADD_NEW_MATERIALS',
-    payload: material,
+    type: 'UPDATE_MATERIALS',
+    payload: {
+      name: name,
+      identifier: identifier,
+      density: density,
+      cost: cost,
+    },
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newMaterial = await Axios.post(
-      'http://localhost:5000/api/materials/new',
+    const editedMaterial = await Axios.put(
+      `http://localhost:5000/api/materials/${id}`,
       {
         name: name,
         identifier: identifier,
@@ -27,17 +37,20 @@ const NewMaterialsForm = () => {
         cost: cost,
       }
     );
-    console.log('new', newMaterial);
-    dispatch(addMaterial(newMaterial.data));
+    console.log('editedMaterial', editedMaterial);
+    dispatch(addMaterial(editedMaterial.data));
   };
 
   return (
     <div className='new-material'>
-      <form>
+      <div className='all-mats-cont'>
+        {material ? <MaterialCard material={material} /> : ''}
+      </div>
+      <form className='new-material__form'>
         <label>Name</label>
         <input
-          type={'text'}
-          name={'name'}
+          type='text'
+          name='name'
           value={name}
           onChange={(event) => setName(event.target.value)}
         />
@@ -68,4 +81,4 @@ const NewMaterialsForm = () => {
   );
 };
 
-export default NewMaterialsForm;
+export default EditMaterialForm;

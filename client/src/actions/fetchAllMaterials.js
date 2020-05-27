@@ -11,7 +11,7 @@ const FetchAllMaterials = () => {
   useEffect(() => {
     (async () => {
       const materials = await Axios.get('http://localhost:5000/api/materials');
-      dispatch(addMaterials(materials));
+      dispatch(addMaterials(materials.data));
     })();
   }, []);
 };

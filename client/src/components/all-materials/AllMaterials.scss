@@ -1,0 +1,37 @@
+.all-mats-cont {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  align-items: top;
+  justify-content: center;
+  grid-gap: 20px;
+  width: 70w;
+  text-align: left;
+  padding: 10px;
+
+  &__card {
+    padding: 25px;
+    background-color: #ffffff;
+    list-style: none;
+    box-shadow: 0 0 3em rgba(0, 0, 0, 0.15);
+  }
+
+  &__spans {
+    float: right;
+  }
+
+  &__button {
+    margin-right: 10px;
+    font-family: lato-bold;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  &__button--edit {
+    color: var(--dark-blue);
+  }
+
+  &__button--delete {
+    color: var(--red);
+  }
+}

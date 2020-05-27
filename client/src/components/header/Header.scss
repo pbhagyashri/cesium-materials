@@ -1,0 +1,13 @@
+.app-nav {
+  display: flex;
+  padding: 10px;
+  margin-bottom: 55px;
+  justify-content: space-around;
+
+  &__logo {
+    text-decoration: none;
+    font-family: lato-regular;
+    font-size: 2rem;
+    color: var(--dark-gray);
+  }
+}

@@ -17,8 +17,8 @@ module.exports = (app) => {
       .catch((err) => res.send(err));
   });
 
-  //add new material
-  app.post('/api/materials', (req, res, next) => {
+  //add a new material
+  app.post('/api/materials/new', (req, res, next) => {
     const { name, identifier, density, cost } = req.body;
 
     Material.findOne({ name: name }).then((existingMaterial) => {
@@ -31,7 +31,7 @@ module.exports = (app) => {
         })
           .save()
           .then((material) => res.send(material))
-          .catch((err) => res.send(err));
+          .catch((err) => next(err));
       } else {
         const error = new Error('Material already exists');
         error.statusCode = 409;
